@@ -218,7 +218,7 @@ nav h1 {
 
 /* Portfolio styles */
 .content h1 {
-  color: black;
+  color: rgb(233, 227, 227);
 }
 
 #portfolio {
@@ -252,7 +252,7 @@ nav h1 {
 }
 
 #portfolio a:hover {
-  background: #000;
+  background: #209ae0;
   color: #fff;
   transform: translateX(4px);
 }
