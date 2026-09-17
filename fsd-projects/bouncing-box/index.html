@@ -5,32 +5,325 @@
     <title>Bouncing Box</title>
     <script src="jquery.min.js"></script>
     <style>
-      .box {
-        width: 70px;
-        height: 70px;
-        background-color: teal;
-        font-size: 300%;
-        text-align: center;
-        user-select: none;
-        display: block;
-        position: absolute;
-        top: 100px;
-        /* Change me! */
-        left: 0px;
-      }
-
       .board {
-        height: 100vh;
-      }
-    </style>
-    <!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
-  </head>
+          height: 100vh;
+          background-color: #030611;
+          overflow: hidden;
+        }
+        /* Animated Time Vortex Background Image */
+        .board::before {
+          content: "";
+          position: absolute;
+          top: -20%;
+          left: -20%;
+          width: 140%;
+          height: 140%;
+          background-image: url("https://t4.ftcdn.net/jpg/02/72/64/89/360_F_272648902_UydiSHfsVjiX4LSycKOBhPlnled7LxZf.jpg");
+          background-size: cover;
+          background-position: center;
+          animation: vortexMotion 15s ease-in-out infinite alternate;
+          z-index: 0;
+        }
 
-  <body class="board">
-    <!-- HTML for the box -->
-    <div class="box">?</div>
+        @keyframes vortexMotion {
+          0% {
+            transform: scale(1) rotate(0deg);
+            filter: brightness(1);
+          }
+          50% {
+            transform: scale(1.15) rotate(2deg);
+            filter: brightness(1.2);
+          }
+          100% {
+            transform: scale(1.05) rotate(-2deg);
+            filter: brightness(0.9);
+          }
+        }
+        /* Outer TARDIS Main Frame */
+        .box {
+          width: 96px;
+          height: 155px;
+          background-color: #002d62;
+          color: white;
+          font-family: Arial, sans-serif;
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+          user-select: none;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 100px;
+          left: 0px;
 
+          border: 4px solid #001836;
+          box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.85), 0 8px 18px rgba(0, 0, 0, 0.7);
+          border-radius: 2px;
+          box-sizing: border-box;
+          cursor: pointer;
+        }
+
+        /* Stepped Pyramid Roof Structure */
+        .box::before {
+          content: "";
+          position: absolute;
+          top: -6px;
+          left: -2px;
+          right: -2px;
+          height: 6px;
+          background-color: #001e42;
+          border-top: 1px solid #003d80;
+          z-index: 2;
+        }
+
+        .box::after {
+          content: "";
+          position: absolute;
+          top: -11px;
+          left: 6px;
+          right: 6px;
+          height: 5px;
+          background-color: #00244e;
+          border-top: 1px solid #004b9c;
+          z-index: 2;
+        }
+
+        /* Animated Pulsing Beacon Light */
+        .tardis-light {
+          position: absolute;
+          top: -21px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 12px;
+          height: 10px;
+          background-color: #fffdec;
+          border: 1px solid #111;
+          border-radius: 2px 2px 0 0;
+          box-shadow: 0 0 10px #ffffff, 0 0 20px #ffe066;
+          animation: pulse 1.8s infinite ease-in-out;
+          z-index: 3;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; box-shadow: 0 0 10px #ffffff, 0 0 20px #ffe066; }
+          50% { opacity: 0.35; box-shadow: 0 0 3px #ffffff; }
+        }
+
+        /* Police Box Sign Banner */
+        .police-sign {
+          position: absolute;
+          top: 4px;
+          left: 4px;
+          right: 4px;
+          height: 14px;
+          background-color: #000000;
+          color: #ffffff;
+          font-size: 5.5px;
+          line-height: 14px;
+          letter-spacing: 0.5px;
+          border: 1px solid #ffffff;
+          box-sizing: border-box;
+          z-index: 3;
+        }
+
+        /* Doors Container Layout */
+        .tardis-details {
+          position: absolute;
+          top: 22px;
+          bottom: 4px;
+          left: 4px;
+          right: 4px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1.1fr 1fr 1.2fr 1.2fr;
+          gap: 3px;
+          pointer-events: none;
+        }
+
+        /* Center Seam dividing Left and Right Doors */
+        .door-seam {
+          position: absolute;
+          top: 22px;
+          bottom: 4px;
+          left: 50%;
+          width: 1px;
+          background-color: #001229;
+          transform: translateX(-50%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        /* Window Panes with Inner Grids */
+        .window {
+          background-color: #010c89;
+          border: 1px solid #1b0588;
+          border-radius: 1px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 1fr 1fr 1fr;
+          gap: 1px;
+          padding: 1px;
+          box-sizing: border-box;
+        }
+
+        .window-pane {
+          background-color: #f8f8f8;
+        }
+
+        /* Left Door Call Box Notice Sign */
+        .notice-sign {
+          background-color: #ececec;
+          border: 1px solid #001836;
+          color: #000;
+          font-size: 3px;
+          line-height: 3.5px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          padding: 1px;
+          font-family: serif;
+          font-weight: normal;
+        }
+
+        /* Right Door Panel containing St. John Badge & Door Handles */
+        .panel-with-badge {
+          background-color: #00224a;
+          border: 1px solid #00152e;
+          box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7);
+          border-radius: 1px;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* St. John Ambulance Badge Logo */
+        .st-john-badge {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: radial-gradient(circle, #ffffff 40%, #000000 45%);
+          border: 1px solid #ffffff;
+        }
+
+        /* Metal Handles & Keyhole Hardware */
+        .handle-left {
+          position: absolute;
+          right: 2px;
+          bottom: 2px;
+          width: 1px;
+          height: 7px;
+          background-color: #d1d1d1;
+          box-shadow: 0 0 1px #000;
+        }
+
+        .handle-right {
+          position: absolute;
+          left: 2px;
+          bottom: 2px;
+          width: 1px;
+          height: 7px;
+          background-color: #d1d1d1;
+          box-shadow: 0 0 1px #000;
+        }
+
+        .keyhole {
+          position: absolute;
+          left: 2px;
+          bottom: 11px;
+          width: 2px;
+          height: 2px;
+          border-radius: 50%;
+          background-color: #ffeeaa;
+          box-shadow: 0 0 1px #000;
+        }
+
+        /* Standard Wood Panels */
+        .panel {
+          background-color: #00224a;
+          border: 1px solid #00152e;
+          box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.7);
+          border-radius: 1px;
+          position: relative;
+        }
+
+        /* Center Score Display Badge */
+        .score-display {
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 15, 35, 0.9);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        border: 1px solid #00d2ff;
+        font-size: 16px;
+        text-shadow: 0 0 6px #00d2ff;
+        pointer-events: none;
+        }
+     </style>
+   </head>
+   <body class="board">
+     
+     <div class="box">
+  <div class="score-display">0</div>
+
+       <!-- Animated Beacon Light -->
+       <div class="tardis-light"></div>
+
+
+       <!-- Main Header Sign -->
+       <div class="police-sign">POLICE PUBLIC CALL BOX</div>
+
+
+       <!-- Seam Between Left & Right Doors -->
+       <div class="door-seam"></div>
+
+
+       <!-- Grid of Door Components -->
+       <div class="tardis-details">
+         <!-- Row 1: Divided Window Panes -->
+         <div class="window">
+           <div class="window-pane"></div><div class="window-pane"></div>
+           <div class="window-pane"></div><div class="window-pane"></div>
+           <div class="window-pane"></div><div class="window-pane"></div>
+         </div>
+         <div class="window">
+           <div class="window-pane"></div><div class="window-pane"></div>
+           <div class="window-pane"></div><div class="window-pane"></div>
+           <div class="window-pane"></div><div class="window-pane"></div>
+         </div>
+
+
+         <!-- Row 2: Notice Sign & Right Panel with St. John Badge & Handles -->
+         <div class="notice-sign">
+           POLICE TELEPHONE<br>FREE<br>FOR USE OF<br>PUBLIC<br>PULL TO OPEN
+           <div class="handle-left"></div>
+         </div>
+         <div class="panel-with-badge">
+           <div class="st-john-badge"></div>
+           <div class="handle-right"></div>
+           <div class="keyhole"></div>
+         </div>
+
+
+         <!-- Rows 3 & 4: Lower Wood Panels -->
+         <div class="panel"></div>
+         <div class="panel"></div>
+         <div class="panel"></div>
+         <div class="panel"></div>
+       </div>
     <script>
+
+      
+      /* Updates ONLY the text inside .score-display instead of box.text() */
+      function changeBoxText(newText) {
+      scoreDisplay.text(newText);
+}
       (function () {
         "use strict";
         /* global jQuery */
@@ -41,8 +334,9 @@
 
         var box = jQuery(".box"); // reference to the HTML .box element
         var board = jQuery(".board"); // reference to the HTML .board element
+        var scoreDisplay = jQuery(".score-display"); // Selects the .score-display element
         var boardWidth = board.width(); // the maximum X-Coordinate of the screen
-
+        
         // update the boardWidth variable when the window is resized
         jQuery(window).on("resize", function () {
           boardWidth = board.width();
@@ -59,18 +353,20 @@
           box.css("left", newPositionX);
         }
 
-        // changes the text displayed on the Box
+        /* Updates ONLY the text inside .score-display instead of box.text() */
         function changeBoxText(newText) {
-          box.text(newText);
+        scoreDisplay.text(newText);
         }
+        
 
         //////////////////////////////////////////////////////////////////
         /////////////////// YOUR CODE BELOW HERE /////////////////////////
         //////////////////////////////////////////////////////////////////
 
         // TODO 2 - Variable declarations
-
-
+        var positionX = 5;
+        var points = 0;
+        var speed = 10;
 
 
 
@@ -80,10 +376,16 @@
          * If the box drifts off the screen, turn it around!
          */
         function update() {
-
-        
-
-          
+        moveBoxTo(positionX);
+          positionX += speed;
+          if (positionX >= boardWidth) {
+          // Code to reverse speed goes here
+          speed *= -1
+        } 
+        if (positionX <= 0) {
+        // Code to reverse speed goes here
+        speed *= -1;
+      }    
         }
 
         /**
@@ -94,15 +396,15 @@
          * - move the box to the left side of the screen.
          */
         function handleBoxClick() {
+        points++;
+       changeBoxText(points);
+      positionX = 0;
+      speed += 3;
+      }
 
 
 
-
-        }
-
-
-        
-      })();
+        })();
     </script>
   </body>
 </html>
