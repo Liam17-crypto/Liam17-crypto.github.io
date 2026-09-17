@@ -351,10 +351,11 @@
         // moves the Box to a new position on the screen along the X-Axis
         function moveBoxTo(newPositionX) {
           box.css("left", newPositionX);
+          
         }
 
         /* Updates ONLY the text inside .score-display instead of box.text() */
-        function changeBoxText(newText) {
+        function changeBoxText(newText){
         scoreDisplay.text(newText);
         }
         
@@ -367,7 +368,7 @@
         var positionX = 5;
         var points = 0;
         var speed = 10;
-
+        var speedy = 3
 
 
         /**
@@ -378,17 +379,16 @@
         function update() {
         moveBoxTo(positionX);
           positionX += speed;
-          if (positionX >= boardWidth) {
+          if (positionX > boardWidth) {
           // Code to reverse speed goes here
           speed *= -1
         } 
-        if (positionX <= 0) {
+        if (positionX < 0) {
         // Code to reverse speed goes here
         speed *= -1;
       }    
 
-       
-
+    
 
         }
 
